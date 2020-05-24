@@ -8,6 +8,7 @@ create jar file and run it from script file:
 
 From application root directory create jar file with maven command:
 - mvn package
+
 Then run command:
 - java -jar target/game-app-1.0-SNAPSHOT.jar
 

@@ -1,12 +1,14 @@
 package com.staxter.game;
 
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Responder player engine who receives and replies messages.
  *
  */
 public class ResponderPlayerEngine implements PlayerEngine {
+    private final AtomicInteger counter = new AtomicInteger(0);
     private final BlockingQueue<String> input;
     private final BlockingQueue<String> output;
 
@@ -19,15 +21,16 @@ public class ResponderPlayerEngine implements PlayerEngine {
      * This method is used to handle Responder player's behaviour
      *
      * @param name the name of the player
-     * @param i the index of sending message
      */
     @Override
-    public void handle(String name, int i) throws InterruptedException {
-        String message = input.take();
-        System.out.println(name + " received >> " + message);
-        Thread.sleep(2000);
-        output.put(message + i);
-        System.out.println(name + " replied >> " + message + i);
-        Thread.sleep(2000);
+    public void handle(String name) throws InterruptedException {
+        while(counter.getAndIncrement() < MESSAGE_DEFAULT_COUNT) {
+            Thread.sleep(2000);
+            String message = input.take();
+            Thread.sleep(2000);
+            System.out.println(name + " received >> " + message);
+            output.put(message + counter.get());
+            System.out.println(name + " replied >> " + message + counter.get());
+        }
     }
 }

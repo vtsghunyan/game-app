@@ -1,5 +1,7 @@
 package com.staxter.game;
 
 public interface PlayerEngine {
-    void handle(String name, int i) throws InterruptedException;
+    int MESSAGE_DEFAULT_COUNT = 10;
+
+    void handle(String name) throws InterruptedException;
 }

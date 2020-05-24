@@ -1,7 +1,5 @@
 package com.staxter.game;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 /**
  * This represents player who can send and receive messages.
  *  It can be either initiator or just responder
@@ -9,7 +7,6 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class Player implements Runnable {
     private static final int MESSAGE_DEFAULT_COUNT = 10;
-    private final AtomicInteger counter = new AtomicInteger(0);
     private final PlayerEngine engine;
     private final String name;
 
@@ -19,12 +16,10 @@ public class Player implements Runnable {
     }
 
     public void run() {
-        while(counter.getAndIncrement() < MESSAGE_DEFAULT_COUNT) {
-            try {
-                engine.handle(name, counter.get());
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        try {
+            engine.handle(name);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 }
