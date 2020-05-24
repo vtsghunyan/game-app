@@ -23,7 +23,7 @@ public class InitiatorPlayerEngine implements PlayerEngine {
      * @param name the name of the player
      */
     @Override
-    public void handle(String name) throws InterruptedException {
+    public void handle(String name) throws Exception {
         while(counter.getAndIncrement() < MESSAGE_DEFAULT_COUNT) {
             String message = "message";
             output.put(message);

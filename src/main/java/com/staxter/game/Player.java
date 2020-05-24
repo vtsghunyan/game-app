@@ -6,7 +6,6 @@ package com.staxter.game;
  *
  */
 public class Player implements Runnable {
-    private static final int MESSAGE_DEFAULT_COUNT = 10;
     private final PlayerEngine engine;
     private final String name;
 
@@ -18,7 +17,7 @@ public class Player implements Runnable {
     public void run() {
         try {
             engine.handle(name);
-        } catch (InterruptedException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
